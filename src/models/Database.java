@@ -47,6 +47,7 @@ public class Database {
     public void addBook(Book book) {
         int id = book.getName().hashCode();
         if (getBook(id) != null) {return;} // duplicate book
+        book.id = id;
         books.add(book);
     }
 
@@ -56,6 +57,7 @@ public class Database {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 System.out.println("line: " + line);
+                addBook(new Book().build(line));
             }
         } catch (FileNotFoundException e) {
             System.out.println("Can't open file: " + file.getName());
@@ -74,6 +76,9 @@ public class Database {
                 System.out.println(book.export());
 
             }
+
+            writer.close();
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

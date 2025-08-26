@@ -7,10 +7,17 @@ public class Book {
 
     public boolean isAvailable;
 
-    public Book(String name, String author, int id) {
+    public Book() {
+        this.name = "undefined";
+        this.author = "undefined";
+        this.id = 0;
+        this.isAvailable = true;
+    }
+
+    public Book(String name, String author) {
         this.name = name;
         this.author = author;
-        this.id = id;
+        this.id = 0;
         this.isAvailable = true;
     }
 
@@ -35,18 +42,20 @@ public class Book {
     }
 
     public String export() {
-        return this.getName() + ";" + this.getAuthor() + ";" + this.getId() + ";" + this.isAvailable();
+        return this.getName() + ";" + this.getAuthor() + ";" + this.getId() + ";" + this.isAvailable() + "\n";
     }
 
-    public void build(String input) {
+    public Book build(String input) {
         String[] values = input.split(";");
         if (values.length != 4) {
             System.out.println("Error loading string: " + input);
-            return;
+            return new Book();
         }
         this.name = values[0];
         this.author = values[1];
         this.id = Integer.parseInt(values[2]);
         this.isAvailable = Boolean.parseBoolean(values[3]);
+
+        return this;
     }
 }
