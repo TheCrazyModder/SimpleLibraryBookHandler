@@ -1,32 +1,35 @@
 package models;
 
+import static models.BookStatus.AVAILABLE;
+import static models.BookStatus.NULL;
+
 public class Book {
     public String name;
     public String author;
     public int id;
 
-    public boolean isAvailable;
+    public BookStatus status;
 
     public Book() {
         this.name = "undefined";
         this.author = "undefined";
         this.id = 0;
-        this.isAvailable = true;
+        this.status = NULL;
     }
 
     public Book(String name, String author) {
         this.name = name;
         this.author = author;
         this.id = 0;
-        this.isAvailable = true;
+        this.status = AVAILABLE;
     }
 
-    public boolean isAvailable() {
-        return isAvailable;
+    public BookStatus getStatus() {
+        return this.status;
     }
 
-    public void setAvailable(boolean available) {
-        isAvailable = available;
+    public void setStatus(BookStatus status) {
+        this.status = status;
     }
 
     public String getAuthor() {
@@ -42,7 +45,7 @@ public class Book {
     }
 
     public String export() {
-        return this.getName() + ";" + this.getAuthor() + ";" + this.getId() + ";" + this.isAvailable() + "\n";
+        return this.getName() + ";" + this.getAuthor() + ";" + this.getId() + ";" + this.status.toString() + "\n";
     }
 
     public Book build(String input) {
@@ -54,7 +57,7 @@ public class Book {
         this.name = values[0];
         this.author = values[1];
         this.id = Integer.parseInt(values[2]);
-        this.isAvailable = Boolean.parseBoolean(values[3]);
+        this.status = BookStatus.valueOf(values[3]);
 
         return this;
     }
