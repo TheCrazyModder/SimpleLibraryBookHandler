@@ -32,6 +32,17 @@ public class Database {
         return null;
     }
 
+    public ArrayList<Book> getBooksByTitleSearch(String search) {
+        ArrayList<Book> matches = new ArrayList<>();
+        for (Book book : books) {
+            if (book.getName().contains(search)) {
+                matches.add(book);
+            }
+        }
+
+        return matches;
+    }
+
     public ArrayList<Book> getBooksByAuthor(String author) {
         ArrayList<Book> matches = new ArrayList<>();
         for (Book book : books) {
